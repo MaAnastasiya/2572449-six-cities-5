@@ -1,7 +1,7 @@
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import OfferList from '../../components/offer-list/offer-list';
-import { ratingPercentage, TypeOfCardList } from '../../utils';
+import { ratingPercentage, typeOfCardList } from '../../utils';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchNearbyAction, fetchOfferAction, fetchReviewsAction } from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
@@ -12,7 +12,6 @@ import { getChosenOffer, getIsChosenOfferDataLoading, getNearbyOffers, getReview
 import { getOffers } from '../../store/offers-data/selectors';
 import { changeHighlightedMarker } from '../../store/common-data/common-data';
 import ChangeFavoriteButton from '../../components/change-favorite-button/change-favorite-button';
-import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 const MAXIMUM_NEARBY_PREVIEW = 3;
 
@@ -21,7 +20,7 @@ function OfferScreen(): JSX.Element {
   const offer = useAppSelector(getChosenOffer);
   const reviews = useAppSelector(getReviews);
   const nearbyOffers = useAppSelector(getNearbyOffers);
-  const offers = useAppSelector(getOffers);
+  const city = useAppSelector(getOffers)[0].city;
   const id = String(useParams().id);
 
   const displayedNearby = (nearbyOffers).slice(
@@ -41,10 +40,6 @@ function OfferScreen(): JSX.Element {
     return (
       <LoadingScreen />
     );
-  }
-
-  if (!offer) {
-    return <NotFoundScreen />;
   }
 
   const bedrooms = offer?.bedrooms;
@@ -137,13 +132,13 @@ function OfferScreen(): JSX.Element {
             </div>
           </div>
           <section className="offer__map map">
-            <Map points={displayedNearby.map((nearOffer) => nearOffer.location)} city={nearbyOffers.length > 0 ? nearbyOffers[0].city : offers[0].city} />
+            <Map points={displayedNearby.map((nearOffer) => nearOffer.location)} city={nearbyOffers.length > 0 ? nearbyOffers[0].city : city} />
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OfferList offers={displayedNearby} listType={TypeOfCardList.nearest} />
+            <OfferList offers={displayedNearby} listType={typeOfCardList.nearest} />
           </section>
         </div>
       </main>

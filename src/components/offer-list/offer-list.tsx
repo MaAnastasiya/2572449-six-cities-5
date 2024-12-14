@@ -1,4 +1,4 @@
-import { getSortedOffers, listToCard, TypeOfCardList } from '../../utils';
+import { getSortedOffers, listToCard, typeOfCardList } from '../../utils';
 import { useAppSelector } from '../../hooks';
 import { Offer } from '../../types/offer';
 import OfferCard from '../offer-card/offer-card';
@@ -6,7 +6,7 @@ import { getSortType } from '../../store/common-data/selectors';
 
 type OfferListProps = {
   offers: Offer[];
-  listType: TypeOfCardList;
+  listType: typeOfCardList;
 };
 
 function OfferList({offers, listType}: OfferListProps): JSX.Element {
