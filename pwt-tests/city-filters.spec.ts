@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('should change city and update offers list with different offers', async ({ page }) => {
 
-    await page.goto('http://localhost:5133');
+    await page.goto('http://localhost:5173');
     await page.waitForSelector('.locations__list');
 
     const initialCity = 'Cologne';

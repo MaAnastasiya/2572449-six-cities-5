@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('comment form submission should work only when logged in', async ({ page }) => {
 
-    await page.goto('http://localhost:5133');
+    await page.goto('http://localhost:5173');
 
     // Пользователь не залогинен
     await page.waitForSelector('.cities__card'); 
@@ -13,7 +13,7 @@ test('comment form submission should work only when logged in', async ({ page })
 
 
     await page.click('.header__login'); 
-    await expect(page).toHaveURL('http://localhost:5133/login');
+    await expect(page).toHaveURL('http://localhost:5173/login');
 
     // Логинимся
     await page.fill('input[name="email"]', 'test@test.com');
@@ -21,7 +21,7 @@ test('comment form submission should work only when logged in', async ({ page })
     
     await page.click('button[type="submit"]'); 
     await page.waitForTimeout(2000); 
-    expect(page.url()).toBe('http://localhost:5133/'); 
+    expect(page.url()).toBe('http://localhost:5173/'); 
     await page.waitForSelector('.cities__card'); 
     await page.locator('.place-card__name').first().click();
     await page.waitForSelector('.offer__name');

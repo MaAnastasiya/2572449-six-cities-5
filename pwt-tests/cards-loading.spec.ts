@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('check loading cards from server', async ({ page }) => {
 
-    await page.goto('http://localhost:5133');
+    await page.goto('http://localhost:5173');
 
     await page.waitForSelector('.cities__card'); // Ждем появления не менее одной карточки
 

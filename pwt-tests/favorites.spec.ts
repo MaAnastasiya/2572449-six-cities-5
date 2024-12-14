@@ -7,20 +7,20 @@ test('favorites screen functionality', async ({ page }) => {
     await page.locator('.place-card__name').first().click(); 
     await page.waitForSelector('.offer__name'); 
     await page.click('.place-card__bookmark-button'); 
-    await expect(page).toHaveURL('http://localhost:5133/login');
+    await expect(page).toHaveURL('http://localhost:5173/login');
 
     await page.goto('http://localhost:5173');
     await page.waitForSelector('.cities__card');
     await page.locator('.place-card__bookmark-button').first().click(); 
-    await expect(page).toHaveURL('http://localhost:5133/login'); 
+    await expect(page).toHaveURL('http://localhost:5173/login'); 
 
     await page.goto('http://localhost:5173/favorites');
-    await expect(page).toHaveURL('http://localhost:5133/login');
+    await expect(page).toHaveURL('http://localhost:5173/login');
 
 
-    await page.goto('http://localhost:5133/favorites');
+    await page.goto('http://localhost:5173/favorites');
 
-    await expect(page).toHaveURL('http://localhost:5133/login');
+    await expect(page).toHaveURL('http://localhost:5173/login');
 
     // Логинимся
     await page.fill('input[name="email"]', 'test@test.com');
@@ -29,7 +29,7 @@ test('favorites screen functionality', async ({ page }) => {
 
     await page.waitForTimeout(2000);
 
-    await expect(page).toHaveURL('http://localhost:5133/');
+    await expect(page).toHaveURL('http://localhost:5173/');
 
     let initialFavoritesCount = Number(await page.locator('.header__favorite-count').textContent());
 
@@ -42,7 +42,7 @@ test('favorites screen functionality', async ({ page }) => {
     await firstBookmarkButton.click();
     await page.waitForTimeout(1000); 
 
-    await expect(page).toHaveURL('http://localhost:5133/');
+    await expect(page).toHaveURL('http://localhost:5173/');
     const updatedFirstClasses = await firstBookmarkButton.getAttribute('class');
     const isNowFirstFavorite = updatedFirstClasses ? updatedFirstClasses.includes('place-card__bookmark-button--active') : false;
     expect(isNowFirstFavorite).toBe(!isInitiallyFirstFavorite);
@@ -60,7 +60,7 @@ test('favorites screen functionality', async ({ page }) => {
 
 
 
-    await page.goto('http://localhost:5133/favorites');
+    await page.goto('http://localhost:5173/favorites');
 
-    await expect(page).toHaveURL('http://localhost:5133/favorites');
+    await expect(page).toHaveURL('http://localhost:5173/favorites');
 });
